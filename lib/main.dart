@@ -1,5 +1,6 @@
 import 'package:clean_architecture_pattern/app_theme.dart';
 import 'package:clean_architecture_pattern/application/core/services/theme_service.dart';
+import 'package:clean_architecture_pattern/application/pages/advice/advice_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +21,7 @@ class AdvicerApp extends StatelessWidget {
           themeMode: themeService.isDarkModeOn ? ThemeMode.dark : ThemeMode.light,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-          home: Placeholder(),
+          home: const AdvicePage(),
         );
       },
     );
