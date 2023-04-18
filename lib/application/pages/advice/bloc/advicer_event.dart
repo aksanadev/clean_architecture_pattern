@@ -4,6 +4,6 @@ part of 'advicer_bloc.dart';
 abstract class AdvicerEvent {}
 
 class AdviceRequestedEvent extends AdvicerEvent {
-  final String input;
-  AdviceRequestedEvent({required this.input});
+  final String? input;
+  AdviceRequestedEvent({this.input});
 }
