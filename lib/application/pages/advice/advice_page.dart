@@ -1,5 +1,6 @@
 import 'package:clean_architecture_pattern/application/core/services/theme_service.dart';
 import 'package:clean_architecture_pattern/application/pages/advice/bloc/advicer_bloc.dart';
+// import 'package:clean_architecture_pattern/application/pages/advice/cubit/advicer_cubit.dart';
 import 'package:clean_architecture_pattern/application/pages/advice/widgets/advice_field.dart';
 import 'package:clean_architecture_pattern/application/pages/advice/widgets/custom_button.dart';
 import 'package:clean_architecture_pattern/application/pages/advice/widgets/error_message.dart';
@@ -53,7 +54,7 @@ class AdvicePage extends StatelessWidget {
                   builder: (context, state) {
                     if (state is AdvicerInitial) {
                       return Text(
-                        'Your Advice is waiting for you!',
+                        state.advicePlaceHolder,
                         style: themeData.textTheme.headline1,
                       );
                     } else if (state is AdvicerStateLoading) {
