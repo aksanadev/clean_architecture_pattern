@@ -8,6 +8,8 @@ abstract class AdvicerTwoState extends Equatable {
 }
 
 class AdvicerInitial extends AdvicerTwoState {
+  final String initialAdvice;
+  const AdvicerInitial({required this.initialAdvice});
   @override
   List<Object?> get props => [];
 }
@@ -21,16 +23,16 @@ class AdvicerStateLoaded extends AdvicerTwoState {
   final String advice;
 
   const AdvicerStateLoaded({required this.advice});
-  
+
   @override
-  List<Object?> get props =>[advice];
+  List<Object?> get props => [advice];
 }
 
 class AdvicerStateError extends AdvicerTwoState {
   final String message;
 
   const AdvicerStateError({required this.message});
-  
+
   @override
   List<Object?> get props => [message];
 }

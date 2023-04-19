@@ -1,12 +1,11 @@
 import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 part 'advicer_state.dart';
 
 class AdvicerCubit extends Cubit<AdvicerTwoState> {
-  AdvicerCubit() : super(AdvicerInitial());
+  AdvicerCubit() : super(const AdvicerInitial(initialAdvice: 'Your Advice is waitnig for you!'));
 
   void adviceRequested() async {
     emit(AdvicerStateLoading());

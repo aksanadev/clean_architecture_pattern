@@ -1,6 +1,5 @@
 import 'package:clean_architecture_pattern/application/core/services/theme_service.dart';
-import 'package:clean_architecture_pattern/application/pages/advice/bloc/advicer_bloc.dart';
-// import 'package:clean_architecture_pattern/application/pages/advice/cubit/advicer_cubit.dart';
+import 'package:clean_architecture_pattern/application/pages/advice/cubit/advicer_cubit.dart';
 import 'package:clean_architecture_pattern/application/pages/advice/widgets/advice_field.dart';
 import 'package:clean_architecture_pattern/application/pages/advice/widgets/custom_button.dart';
 import 'package:clean_architecture_pattern/application/pages/advice/widgets/error_message.dart';
@@ -14,8 +13,8 @@ class AdvicerPageWrapperProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AdvicerBloc(),
-      child: AdvicePage(),
+      create: (context) => AdvicerCubit(),
+      child: const AdvicePage(),
     );
   }
 }
@@ -50,11 +49,11 @@ class AdvicePage extends StatelessWidget {
           children: [
             Expanded(
               child: Center(
-                child: BlocBuilder<AdvicerBloc, AdvicerState>(
+                child: BlocBuilder<AdvicerCubit, AdvicerTwoState>(
                   builder: (context, state) {
                     if (state is AdvicerInitial) {
                       return Text(
-                        state.advicePlaceHolder,
+                        state.initialAdvice,
                         style: themeData.textTheme.headline1,
                       );
                     } else if (state is AdvicerStateLoading) {
