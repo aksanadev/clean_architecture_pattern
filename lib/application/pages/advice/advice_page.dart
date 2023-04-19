@@ -3,6 +3,7 @@ import 'package:clean_architecture_pattern/application/pages/advice/cubit/advice
 import 'package:clean_architecture_pattern/application/pages/advice/widgets/advice_field.dart';
 import 'package:clean_architecture_pattern/application/pages/advice/widgets/custom_button.dart';
 import 'package:clean_architecture_pattern/application/pages/advice/widgets/error_message.dart';
+import 'package:clean_architecture_pattern/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,7 @@ class AdvicerPageWrapperProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AdvicerCubit(),
+      create: (context) => sl<AdvicerCubit>(),
       child: const AdvicePage(),
     );
   }
@@ -45,7 +46,6 @@ class AdvicePage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50),
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
               child: Center(

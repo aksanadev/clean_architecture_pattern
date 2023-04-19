@@ -5,7 +5,8 @@ import 'package:clean_architecture_pattern/domain/repositories/advice_repo.dart'
 import 'package:dartz/dartz.dart';
 
 class AdviceUsecases {
-  final AdviceRepo adviceRepo = AdviceRepoImpl();
+  final AdviceRepo adviceRepo;
+  AdviceUsecases({required this.adviceRepo});
 
   Future<Either<Failure, AdviceEntity>> getAdvice() async {
     return adviceRepo.getAdviceFromDatasource();

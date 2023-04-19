@@ -11,11 +11,13 @@ const generalFailureMessage = 'FAILURE, general failure';
 const defaultFailueMessage = 'FAILURE, undocummented failure';
 
 class AdvicerCubit extends Cubit<AdvicerTwoState> {
-  AdvicerCubit()
-      : super(const AdvicerInitial(
-            initialAdvice: 'Your Advice is waitnig for you!'));
+  AdvicerCubit({
+    required this.adviceUsecases,
+  }) : super(const AdvicerInitial(
+          initialAdvice: 'Your Advice is waitnig for you!',
+        ));
 
-  final AdviceUsecases adviceUsecases = AdviceUsecases();
+  final AdviceUsecases adviceUsecases;
 
   void adviceRequested() async {
     emit(AdvicerStateLoading());
