@@ -1,10 +1,13 @@
+import 'package:clean_architecture_pattern/data/repositories/advice_repo_impl.dart';
 import 'package:clean_architecture_pattern/domain/entities/advice_entity.dart';
+import 'package:clean_architecture_pattern/domain/failures/failures.dart';
+import 'package:dartz/dartz.dart';
 
 class AdviceUsecases {
-  Future<AdviceEntity> getAdvice() async {
-    //call repository to get data (failure or data)
-    //proceed with business login (manipulate the data)
-    await Future.delayed(const Duration(seconds: 3), () {});
-    return const AdviceEntity(advice: 'Stay LiT for Him!', id: 1);
+  final adviceRepo = AdviceRepoImpl();
+
+  Future<Either<Failure, AdviceEntity>> getAdvice() async {
+    return adviceRepo.getAdviceFromDataSource();
+    //space got business logic
   }
 }

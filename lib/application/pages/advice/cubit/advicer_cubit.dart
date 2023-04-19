@@ -1,10 +1,14 @@
-import 'dart:developer';
-import 'package:clean_architecture_pattern/domain/entities/advice_entity.dart';
+import 'package:clean_architecture_pattern/domain/failures/failures.dart';
 import 'package:clean_architecture_pattern/domain/usecases/advice_usecases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
 part 'advicer_state.dart';
+
+const serverFailureMessage = 'FAILURE, server failed.';
+const cacheFailureMessage = 'FAILURE, chache failed.';
+const generalFailureMessage = 'FAILURE, general failure';
+const defaultFailueMessage = 'FAILURE, undocummented failure';
 
 class AdvicerCubit extends Cubit<AdvicerTwoState> {
   AdvicerCubit()
@@ -15,12 +19,24 @@ class AdvicerCubit extends Cubit<AdvicerTwoState> {
 
   void adviceRequested() async {
     emit(AdvicerStateLoading());
-    final AdviceEntity advice = await adviceUsecases.getAdvice();
-    log('getting advice...');
-    await Future.delayed(const Duration(seconds: 3), () {});
-    log('got advice!');
-    emit(AdvicerStateLoaded(advice: advice.advice));
-    log('Advice: ${advice.advice.toString()}');
-    // emit(AdvicerStateError(message: 'Error Message, could not get advice'));
+    final failureOrAdvice = await adviceUsecases.getAdvice();
+    failureOrAdvice.fold(
+      (failure) =>
+          emit(AdvicerStateError(message: _mapFailureToMessage(failure))),
+      (advice) => emit(AdvicerStateLoaded(advice: advice.advice)),
+    );
+  }
+
+  String _mapFailureToMessage(Failure failure) {
+    switch (failure.runtimeType) {
+      case ServerFailure:
+        return serverFailureMessage;
+      case CacheFailure:
+        return cacheFailureMessage;
+      case GeneralFailure:
+        return generalFailureMessage;
+      default:
+        return defaultFailueMessage;
+    }
   }
 }
