@@ -20,6 +20,7 @@ class AdvicerCubit extends Cubit<AdvicerTwoState> {
   void adviceRequested() async {
     emit(AdvicerStateLoading());
     final failureOrAdvice = await adviceUsecases.getAdvice();
+    //failed OR got data?
     failureOrAdvice.fold(
       (failure) =>
           emit(AdvicerStateError(message: _mapFailureToMessage(failure))),

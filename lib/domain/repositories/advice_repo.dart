@@ -3,5 +3,5 @@ import 'package:clean_architecture_pattern/domain/failures/failures.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class AdviceRepo {
-  Future<Either<Failure, AdviceEntity>> getAdviceFromDataSource();
+  Future<Either<Failure, AdviceEntity>> getAdviceFromDatasource();
 }
